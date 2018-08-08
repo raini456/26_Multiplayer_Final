@@ -1,0 +1,48 @@
+
+
+
+
+
+
+
+*{font-family:verdana;}
+
+body{    
+    background-color: #565656;    
+}
+
+#wrapper{    
+ width:300px;  height:500px; background-color:whitesmoke;
+ margin:auto; margin-top:5%;overflow: hidden;border-radius:5px;box-shadow:2px 2px 2px black;
+ position:relative;
+}
+
+
+.moveBox{width:1200px;height:500px;position: absolute;}
+.siteView{width:300px;height:500px;float:left;}
+
+.startView{background-color:gainsboro;}
+.registerView{background-color:palegoldenrod;}
+.gameView{background-color:tan;}
+
+.loginBox, .registerBox{
+    width:250px; padding-bottom:10px; border:1px solid white;
+    margin:auto; margin-top: 5%;
+    background-color:whitesmoke;
+}
+
+#loginForm input, #registerForm input{
+    display:block;
+    width:200px; height:25px; margin:auto; margin-top:10px;
+}
+
+.loginBtns{color:white;width:200px; height:25px; margin:auto; margin-top:10px;
+          text-align:center;
+          cursor:pointer;
+          
+}
+.loginBtns:hover{opacity:0.5;}
+
+.registerBtn{background-color:lightblue;}
+.loginBtn{background-color:lightgreen;}
+.saveRegisterBtn{background-color:lightgreen;}
