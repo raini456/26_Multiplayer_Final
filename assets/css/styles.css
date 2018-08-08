@@ -1,0 +1,76 @@
+*{font-family:verdana;}
+
+body{    
+    background-color: #565656;    
+}
+
+#wrapper{    
+ width:300px;  
+ height:500px; 
+ background-color:whitesmoke;
+ margin:auto; 
+ margin-top:5%;
+ overflow: hidden;
+ border-radius:5px;
+ box-shadow:2px 2px 2px black;
+ position:relative;
+}
+
+
+.moveBox{width:1200px;height:500px;position: absolute;}
+.siteView{width:300px;height:500px;float:left;}
+
+.startView{
+    background-color:gainsboro;
+}
+.registerView{
+    background-color:palegoldenrod;
+    text-align:center;
+}
+.gameView{
+    background-color:lightgreen;
+    width:600px;
+}
+
+.loginBox, .registerBox{
+    width:250px;
+    height:200px;
+    border:1px solid white; 
+    border-radius:10px;
+    position: absolute;
+    margin:auto;
+    margin-left:10px;
+    margin-top:10px;
+    padding:1%;
+    background-color:whitesmoke;
+}
+.registerBox{
+    height:300px;
+}
+#loginForm input, #registerForm input{
+    padding:1%;
+    display:block;
+    width: 200px; 
+    height:25px; 
+    margin:10px auto;
+}
+.registerBtn, .loginBtn, .saveRegisterBtn, .backBtn{  
+    box-shadow: 0 0 5px black;
+    border-radius:5px;
+    color:white;
+    cursor:pointer;
+    text-align:center;
+    width:200px;
+    height:25px; 
+    margin:25px;
+    background-color:green;
+}
+.backBtn{
+    background-color:red;
+}
+.registerBtn:hover, .loginBtn:hover, .saveRegisterBtn:hover, .backBtn:hover{
+    opacity:0.6;
+}
+.registerBtn{
+    background-color:background;
+}
