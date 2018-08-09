@@ -48,13 +48,14 @@ if (isset($_GET['flag'])) {
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($rows);
     }  
-    if ($_GET['flag'] == '4' && isset($_POST['xp'])) {
-//        $sql = "UPDATE room1 SET xpos = '200', ypos='200' WHERE id='1'";                 
-        $sql = "UPDATE room1 SET xpos =:x,ypos=:y WHERE id=:i"; 
-        $statement = $db->prepare(sql);       
-        $statement->bindValue(':x',$_POST['xp']);
-        $statement->bindValue(':y',$_POST['yp']);
-        $statement->bindValue(':i',$_POST['id']);
+    if ($_GET['flag'] == '4') {
+        
+      $sql = "UPDATE room1 SET xpos = '200', ypos='200' WHERE id='1'";                 
+//        $sql = "UPDATE room1 SET xpos =:x,ypos=:y WHERE id=:i"; 
+        $statement = $db->query($sql);       
+//        $statement->bindValue(':x',$_POST['xp']);
+//        $statement->bindValue(':y',$_POST['yp']);
+//        $statement->bindValue(':i',$_POST['id']);
         $statement ->execute();
         
     }

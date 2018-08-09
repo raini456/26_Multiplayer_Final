@@ -43,17 +43,18 @@ $(document).ready(function(){
         console.log(allData);
         var xp = parseInt(allData[0].xpos);
         var yp = parseInt(allData[0].ypos);
+        console.log(xp, yp);
         if(event.keyCode==37){
-            xp -= 15; console.log("left", xp);
+            xp -= 15; //console.log("left", xp);
         };
         if(event.keyCode==38){
-            yp -= 15;console.log("up", yp);
+            yp -= 15;//console.log("up", yp);
         };
         if(event.keyCode==39){
-           xp += 15; console.log("right", xp); 
+           xp += 15; //console.log("right", xp); 
         };
         if(event.keyCode==40){
-           yp += 15; console.log("down", yp); 
+           yp += 15; //console.log("down", yp); 
         };
         $.post('db.php?flag=4',{
             xp:xp,
@@ -66,7 +67,16 @@ $(document).ready(function(){
 function loop(){
     updateScreen();
 }
-
+function updateScreen(){
+    context.clearRect(0,0,550, 450);
+    $.post('db.php?flag=3',function(data,status){
+    allData = JSON.parse(data);            
+    drawRectInCanvas(allData[0].xpos,allData[0].ypos,allData[0].color);
+    drawRectInCanvas(allData[1].xpos,allData[1].ypos,allData[1].color);
+    drawRectInCanvas(allData[2].xpos,allData[2].ypos,allData[2].color);
+    drawRectInCanvas(allData[3].xpos,allData[3].ypos,allData[3].color);
+    });
+}
 
 function drawRectInCanvas(xp, yp, color){
     context.beginPath();
