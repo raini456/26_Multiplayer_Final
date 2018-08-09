@@ -1,15 +1,19 @@
 
 //$( selector(htmlelement,cssclass,id) ).methode -> .css(),.attr(),.hide(),.show()
 //$( selector(htmlelement,cssclass,id) ).event(fn(){...})   -> .click(),.ready(),.on() 
-var email;
-var regUser;
+var email="";
+var regUser="";
 var pass1;
 var pass2;
+var pass;
+var canvas;
+var context;
 $(document).ready(function(){
-    
-    console.log("READY !!!");
+    canvas = document.getElementById('canvasGame');
+    context = canvas.getContext('2d');
+//    console.log("READY !!!");
     // Globale Variablen Startwere setzen
-  
+    checkRegister();
     $('.registerBtn').click(function(){
         $('.moveBox').animate({
             left:'-900px'
@@ -21,55 +25,54 @@ $(document).ready(function(){
             left:'0px'
         });
     });
-    checkRegister();
+    
     $('.saveRegisterBtn').click(function(){
-        if((pass1!="" && pass2!="") && pass1==pass2){            
+        if((pass1!="" && pass2!="") && pass1==pass2){ 
             alert("Die beiden Passwörter stimmen überein!");
+            pass=pass1;
+            registerUser();
         }
         else{
-         registerUser();
+           alert("Leider stimmen die Passwörter nicht überein!");
         }
     });
     
 });//ready End
 function registerUser(){
-    
-  if(isset(regUser)&&isset(pass1)&&isset(email)){
       $.post("db.php?flag=0",{
         user:regUser,
-        pass:pass1,
+        pass:pass,
         email:email
     },
       function (data, status) {
+           
         var tmp = JSON.parse(data);
-            if (tmp.length == 0) {
-                $.post("db.php?flag=1", {
+            if (tmp.length == 0) {                
+                $.post("db.php?flag=1", {                    
                     user: regUser,
                     pass: pass1,
                     email: email
                 },
-                    function (data, status) {
+                    function (data, status) {                      
                       if(status=="success"){
                         $('.moveBox').animate({
                             left:'0px'
                         });
-                      }
-                        //Meldung ....
+                      }                        
                 });
             } else {
                 alert("User ist schon vorhanden");
                 }
-            });    
-  }
+            });      
 }
 function checkRegister(){
-    $('#regUser').change(function(){
-        var checkUser = $(this).val();
+    $('#regUser').change(function(){        
         if($(this).val().length<3){
             eingabeLaenge(); 
         }
         else{
-            regUser=checkUser;
+            regUser=$(this).value;
+            alert(regUser);
         }
     });
     $('#pass1').change(function(){
@@ -86,22 +89,21 @@ function checkRegister(){
         }else{
             pass2 = $(this).value;
         }        
-    });   
-          
-    $('.saveRegisterBtn').click(function(){
-        
-    });
+    });             
+    
     $('#email').change(function(){
         if($(this).val().length<3){
             eingabeLaenge();
         }
+        else{
         var i=$(this).val().indexOf('@');
         if(i==-1){
             alert("Kein @ in der Email vorhanden");
         }
-        else{
-            email=$(this).val();
-        }
+         else{
+             email=$(this).val();            
+         }
+      }
     });
     
 }

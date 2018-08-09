@@ -1,0 +1,4 @@
+Hallo myName, Schön das Sie sich regestriet haben.Um diesen Prozess abzuschliessen klicken Sie bitten auf diesen Link:
+http://localhost/26_Multiplayer_Final/db.php?flag=2&u=myName
+
+Vielen Dank und alles Gute Ihr MPG-TEam

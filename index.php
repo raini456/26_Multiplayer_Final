@@ -29,7 +29,9 @@ and open the template in the editor.
                         <div class="loginBtn">login</div>
                     </div>
                 </div>
-                <div class="gameView siteView"></div>
+                <div class="gameView siteView">
+                    <canvas id="canvasGame"></canvas>
+                </div>
                 <div class="registerView siteView">
                     <h3>Registierung</h3>
                     <div class="registerBox">
