@@ -32,7 +32,6 @@ $(document).ready(function(){
     $('.saveRegisterBtn').click(function(){
         if((pass1!="" && pass2!="") && pass1==pass2){ 
             alert("Die beiden Passwörter stimmen überein!");
-            pass=pass1;
             registerUser();
         }
         else{
@@ -41,6 +40,7 @@ $(document).ready(function(){
     });
     
     $(document).keyup(function(event){
+        console.log(allData);
         var xp = parseInt(allData[0].xpos);
         var yp = parseInt(allData[0].ypos);
         if(event.keyCode==37){
@@ -58,7 +58,7 @@ $(document).ready(function(){
         $.post('db.php?flag=4',{
             xp:xp,
             yp:yp,
-            id:allData[0].id
+            id:1
         }, function(data, status){});
     });
     inter = setInterval(loop, 1000);
@@ -67,30 +67,62 @@ function loop(){
     updateScreen();
 }
 
-function updateScreen(){
-    context.clearRect(0,0,550, 450);
-    $.post('db.php?flag=3',function(data,status){
-    allData = JSON.parse(data);            
-    drawRectInCanvas(allData[0].xpos,allData[0].ypos,allData[0].color);
-    drawRectInCanvas(allData[1].xpos,allData[1].ypos,allData[1].color);
-    drawRectInCanvas(allData[2].xpos,allData[2].ypos,allData[2].color);
-    drawRectInCanvas(allData[3].xpos,allData[3].ypos,allData[3].color);
-    });
-}
+
 function drawRectInCanvas(xp, yp, color){
     context.beginPath();
     context.rect(xp,yp,50,50);
     context.fillStyle=color;
     context.fill();
 }
+function checkRegister(){    
+    $('#regUser').change(function(){        
+        if($(this).val().length<3){
+            eingabeLaenge(); 
+        }
+        else{
+            regUser=$(this).val();            
+        }
+    });
+    $('#pass1').change(function(){
+        if($(this).val().length<3){
+            eingabeLaenge();
+        }else{
+            pass1 = $(this).val();            
+        }
+        
+    });
+    $('#pass2').change(function(){
+        if($(this).val().length<3){
+            eingabeLaenge();
+        }else{
+            pass2 = $(this).val();
+        }        
+    });             
+    
+    $('#email').change(function(){
+        if($(this).val().length<3){
+            eingabeLaenge();
+        }
+        else{
+        var i=$(this).val().indexOf('@');
+        if(i==-1){
+            alert("Kein @ in der Email vorhanden");
+        }
+         else{
+             email=$(this).val();              
+         }
+      }
+    });
+    
+}
 function registerUser(){
+         
       $.post("db.php?flag=0",{
         user:regUser,
         pass:pass,
         email:email
     },
-      function (data, status) {
-           
+      function (data, status) {           
         var tmp = JSON.parse(data);
             if (tmp.length == 0) {                
                 $.post("db.php?flag=1", {                    
@@ -110,48 +142,7 @@ function registerUser(){
                 }
             });      
 }
-function checkRegister(){
-    $('#regUser').change(function(){        
-        if($(this).val().length<3){
-            eingabeLaenge(); 
-        }
-        else{
-            regUser=$(this).value;
-            alert(regUser);
-        }
-    });
-    $('#pass1').change(function(){
-        if($(this).val().length<3){
-            eingabeLaenge();
-        }else{
-            pass1 = $(this).value;
-        }
-        
-    });
-    $('#pass2').change(function(){
-        if($(this).val().length<3){
-            eingabeLaenge();
-        }else{
-            pass2 = $(this).value;
-        }        
-    });             
-    
-    $('#email').change(function(){
-        if($(this).val().length<3){
-            eingabeLaenge();
-        }
-        else{
-        var i=$(this).val().indexOf('@');
-        if(i==-1){
-            alert("Kein @ in der Email vorhanden");
-        }
-         else{
-             email=$(this).val();            
-         }
-      }
-    });
-    
-}
+
 function eingabeLaenge(){    
       alert("Die Eingabe muss länger als 3 Zeichen sein");    
 }

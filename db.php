@@ -49,12 +49,12 @@ if (isset($_GET['flag'])) {
         echo json_encode($rows);
     }  
     if ($_GET['flag'] == '4' && isset($_POST['xp'])) {
-        $sql = "UPDATE room1 SET xpos = '200', ypos='200' WHERE id='1'"; 
-        $statement = $db->prepare(sql);        
-//        $sql = "UPDATE room1 SET xpos =:x,ypos=:y WHERE id=:i";        
-//        $statement->bindValue(':x',$_POST['xp']);
-//        $statement->bindValue(':y',$_POST['yp']);
-//        $statement->bindValue(':i',$_POST['id']);
+//        $sql = "UPDATE room1 SET xpos = '200', ypos='200' WHERE id='1'";                 
+        $sql = "UPDATE room1 SET xpos =:x,ypos=:y WHERE id=:i"; 
+        $statement = $db->prepare(sql);       
+        $statement->bindValue(':x',$_POST['xp']);
+        $statement->bindValue(':y',$_POST['yp']);
+        $statement->bindValue(':i',$_POST['id']);
         $statement ->execute();
         
     }
