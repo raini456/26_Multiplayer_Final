@@ -42,4 +42,20 @@ if (isset($_GET['flag'])) {
         fclose($file);
         echo json_encode($statement);
     }
+    if ($_GET['flag'] == '3') {
+        $sql = "SELECT * FROM room1";        
+        $statement = $db->query($sql);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($rows);
+    }  
+    if ($_GET['flag'] == '4' && isset($_POST['xp'])) {
+        $sql = "UPDATE room1 SET xpos = '200', ypos='200' WHERE id='1'"; 
+        $statement = $db->prepare(sql);        
+//        $sql = "UPDATE room1 SET xpos =:x,ypos=:y WHERE id=:i";        
+//        $statement->bindValue(':x',$_POST['xp']);
+//        $statement->bindValue(':y',$_POST['yp']);
+//        $statement->bindValue(':i',$_POST['id']);
+        $statement ->execute();
+        
+    }
 }

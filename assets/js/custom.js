@@ -8,12 +8,15 @@ var pass2;
 var pass;
 var canvas;
 var context;
+var inter;
+var allDdata;
 $(document).ready(function(){
     canvas = document.getElementById('canvasGame');
     context = canvas.getContext('2d');
 //    console.log("READY !!!");
     // Globale Variablen Startwere setzen
     checkRegister();
+    
     $('.registerBtn').click(function(){
         $('.moveBox').animate({
             left:'-900px'
@@ -37,7 +40,49 @@ $(document).ready(function(){
         }
     });
     
+    $(document).keyup(function(event){
+        var xp = parseInt(allData[0].xpos);
+        var yp = parseInt(allData[0].ypos);
+        if(event.keyCode==37){
+            xp -= 15; console.log("left", xp);
+        };
+        if(event.keyCode==38){
+            yp -= 15;console.log("up", yp);
+        };
+        if(event.keyCode==39){
+           xp += 15; console.log("right", xp); 
+        };
+        if(event.keyCode==40){
+           yp += 15; console.log("down", yp); 
+        };
+        $.post('db.php?flag=4',{
+            xp:xp,
+            yp:yp,
+            id:allData[0].id
+        }, function(data, status){});
+    });
+    inter = setInterval(loop, 1000);
 });//ready End
+function loop(){
+    updateScreen();
+}
+
+function updateScreen(){
+    context.clearRect(0,0,550, 450);
+    $.post('db.php?flag=3',function(data,status){
+    allData = JSON.parse(data);            
+    drawRectInCanvas(allData[0].xpos,allData[0].ypos,allData[0].color);
+    drawRectInCanvas(allData[1].xpos,allData[1].ypos,allData[1].color);
+    drawRectInCanvas(allData[2].xpos,allData[2].ypos,allData[2].color);
+    drawRectInCanvas(allData[3].xpos,allData[3].ypos,allData[3].color);
+    });
+}
+function drawRectInCanvas(xp, yp, color){
+    context.beginPath();
+    context.rect(xp,yp,50,50);
+    context.fillStyle=color;
+    context.fill();
+}
 function registerUser(){
       $.post("db.php?flag=0",{
         user:regUser,

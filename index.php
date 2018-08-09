@@ -30,7 +30,7 @@ and open the template in the editor.
                     </div>
                 </div>
                 <div class="gameView siteView">
-                    <canvas id="canvasGame"></canvas>
+                    <canvas id="canvasGame" width="550" height="440"></canvas>
                 </div>
                 <div class="registerView siteView">
                     <h3>Registierung</h3>
